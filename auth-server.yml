@@ -21,13 +21,13 @@ logging:
 # and token store
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5444/auth
-    username: tkcsowner
-    password: tkcsowner
+    url: jdbc:mysql://localhost:3306/auth
+    username: root
+    password: password
     driver-class: com.mysql.jdbc.Driver
 
   jpa:
-    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    database-platform: org.hibernate.dialect.MySQLDialect
     show-sql: false
     hibernate:
       ddl-auto: create
@@ -39,13 +39,13 @@ spring:
 # Datasource and JPA configuration to be used for storing the OAuth authorization details
 # and token store
   datasource:
-    url: jdbc:postgresql://localhost:5444/auth
-    username: tkcsowner
-    password: tkcsowner
+    url: jdbc:mysql://mysqldb:3306/auth
+    username: root
+    password: password
     driver-class: com.mysql.jdbc.Driver
 
   jpa:
-    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    database-platform: org.hibernate.dialect.MySQLDialect
     show-sql: false
     hibernate:
       ddl-auto: create
