@@ -69,35 +69,24 @@ server:
 zuul:
   ignoredServices: '*'
   routes:
-    user-service:
-      path: /user-service/**
-      stripPrefix: false
-      serviceId: user-webservice
-      sensitiveHeaders:
-    task-service:
-      path: /task-service/**
-      stripPrefix: false
-      serviceId: task-webservice
-      sensitiveHeaders:
+    #user-service:
+     # path: /user-service/**
+     # stripPrefix: false
+     #serviceId: user-webservice
+      #sensitiveHeaders:
     user:
       path: /userauth/**
       stripPrefix: false
       serviceId: auth-server
       sensitiveHeaders:
-#      path: /api/loggedinuser/**
-#      stripPrefix: true
-#      url: http://${authserver.hostname}:${authserver.port}/${authserver.contextPath}/
-#    ui:
-#      path: /**
-#      stripPrefix: false
-#      serviceId: web-portal
-    eureka:
-      user-webservice:
-        semaphore:
-          maxSemaphores: 200
-      task-webservice:
-        semaphore:
-          maxSemaphores: 200
+#     
+    #eureka:
+      #user-webservice:
+       # semaphore:
+        #  maxSemaphores: 200
+      #task-webservice:
+       # semaphore:
+        #  maxSemaphores: 200
 
 # Since our gateway is using Eureka (@EnableEurekaClient), internally it is using Netfix Ribbon to make
 # the actual call. The ribbon call is wrapped within Hystrix so that we can handle any errors.
