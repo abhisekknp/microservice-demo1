@@ -14,6 +14,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * 
  * Note that the server is also a Eureka client so as to register with the
  * Eureka server and be auto-discovered by other Eureka clients.
+ * @author Abhishek.Omar
  *
  */
 @SpringBootApplication

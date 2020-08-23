@@ -37,7 +37,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * defined in the external configuration files specified by the config server.
  * </li>
  * </ol>
- * 
+ * @author Abhishek.Omar
  */
 @SpringBootApplication
 @EnableEurekaClient

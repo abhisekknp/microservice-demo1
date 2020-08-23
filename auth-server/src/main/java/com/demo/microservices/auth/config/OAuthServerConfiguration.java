@@ -44,7 +44,7 @@ import springfox.documentation.swagger.web.SecurityConfiguration;
  * The Class defines the authorization server that would authenticate the user
  * and define the client that seeks authorization on the resource owner's
  * behalf.
- * 
+ * @author Abhishek.Omar
  */
 
 @Configuration

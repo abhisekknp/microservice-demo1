@@ -8,6 +8,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+/**
+ * UserDetails from db.
+ * @author Abhishek.Omar
+ *
+ */
 @Configuration
 public class JdbcUserDetailsService implements UserDetailsService {
 

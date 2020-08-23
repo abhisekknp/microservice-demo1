@@ -12,8 +12,7 @@ import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
  * 
  * Note that all these annotations work in conjunction with properties defined
  * in the external configuration files specified by the config server.
- * 
- * @author anilallewar
+ * @author Abhishek.Omar
  */
 
 @EnableEurekaServer

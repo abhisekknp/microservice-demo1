@@ -17,8 +17,6 @@ public class SwaggerDocumentationConfiguration implements SwaggerResourcesProvid
 	public List<SwaggerResource> get() {
 		List<SwaggerResource> resources = new ArrayList<>();
 		resources.add(this.createSwaggerResource("auth-server", "/userauth/v2/api-docs", "2.0"));
-		resources.add(this.createSwaggerResource("task-service", "/task-service/v2/api-docs", "2.0"));
-		resources.add(this.createSwaggerResource("user-service", "/user-service/v2/api-docs", "2.0"));
 		return resources;
 	}
 
