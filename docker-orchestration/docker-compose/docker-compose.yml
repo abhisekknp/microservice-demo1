@@ -75,3 +75,13 @@ services:
     depends_on:
       configserver:
         condition: service_healthy
+        
+  movieservice:
+    image: microservices_demo/movie-service:0.0.1
+    mem_limit: 1073741824
+    restart: unless-stopped
+    ports:
+      - "8080/tcp"
+    depends_on:
+      eurekaregistry:
+        condition: service_healthy
