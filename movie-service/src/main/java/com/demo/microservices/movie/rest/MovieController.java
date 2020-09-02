@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.demo.microservices.movie.dtos.Movie;
-import com.google.common.collect.Lists;
 
 /**
  * REST endpoint for the movie functionality<br>
@@ -30,7 +29,7 @@ public class MovieController {
 
 	private static final Logger LOGGER = Logger.getLogger(MovieController.class.getName());
 
-	private List<Movie> moviesList = Lists.newArrayList();
+	private final List<Movie> moviesList;
 
 	public MovieController() {
 		this.moviesList = Arrays.asList(new Movie("3 Idiots", "Amir Khan", "Kareena Kapoor", LocalDate.of(2007, 12, 5)),

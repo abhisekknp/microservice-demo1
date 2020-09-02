@@ -3,8 +3,14 @@
  */
 package com.demo.microservices.movie.dtos;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.UUID;
+
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /**
  * Represents basic movie details.
@@ -18,6 +24,10 @@ public class Movie extends MovieKey {
 	private String leadActress;
 
 	private LocalDate releaseDate;
+	
+	public Movie() {
+		super();
+	}
 
 	/**
 	 * Instantiates a new Movie dto.
@@ -26,6 +36,30 @@ public class Movie extends MovieKey {
 		super(UUID.randomUUID(),name);
 		this.leadActor = leadActor;
 		this.leadActress = leadActress;
+		this.releaseDate = releaseDate;
+	}
+
+	public String getLeadActor() {
+		return leadActor;
+	}
+
+	public String getLeadActress() {
+		return leadActress;
+	}
+	@JsonSerialize (using = CustomDateToStringSerializer.class)
+	public LocalDate getReleaseDate() {
+		return releaseDate;
+	}
+
+	public void setLeadActor(String leadActor) {
+		this.leadActor = leadActor;
+	}
+
+	public void setLeadActress(String leadActress) {
+		this.leadActress = leadActress;
+	}
+
+	public void setReleaseDate(LocalDate releaseDate) {
 		this.releaseDate = releaseDate;
 	}
 
@@ -70,6 +104,21 @@ public class Movie extends MovieKey {
 	public String toString() {
 		return "Movie [leadActor=" + leadActor + ", leadActress=" + leadActress + ", releaseDate=" + releaseDate
 				+ ", getId()=" + getId() + ", getName()=" + getName() + "]";
+	}
+	
+	/**
+	 * Custom date serializer that converts the date to string before sending it out
+	 * 
+	 * @author Abhishek.Omar
+	 *
+	 */
+	static class CustomDateToStringSerializer extends JsonSerializer<LocalDate> {
+
+		   @Override 
+		   public void serialize(LocalDate value, 
+		      JsonGenerator generator, SerializerProvider arg2) throws IOException { 
+		      generator.writeString(value.toString()); 
+		   } 
 	}
 	
 }
