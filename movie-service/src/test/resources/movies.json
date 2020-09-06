@@ -1,0 +1,37 @@
+[
+	{
+		"id": "32c7ff19-55b5-4079-82e3-969c70a077cf",
+		"name": "3 Idiots",
+		"leadActor": "Amir Khan",
+		"leadActress": "Kareena Kapoor",
+		"releaseDate": "2007-12-05"
+	},
+	{
+		"id": "21250239-de6b-4ee4-895b-66faa68f7024",
+		"name": "A wednesday",
+		"leadActor": "Naseeruddin Shah",
+		"leadActress": "N/A",
+		"releaseDate": "2005-11-21"
+	},
+	{
+		"id": "8eb2ae25-42ae-4538-b0ab-ae1d36a13b52",
+		"name": "Sholay",
+		"leadActor": "Amitabh Bacchhan",
+		"leadActress": "Hema Malini",
+		"releaseDate": "1975-10-04"
+	},
+	{
+		"id": "8769350c-923f-4fdf-bd10-864e680b1d2a",
+		"name": "Baby",
+		"leadActor": "Akchay Kumar",
+		"leadActress": "Tapsi Pannu",
+		"releaseDate": "2015-05-25"
+	},
+	{
+		"id": "f103dabe-4f79-460c-a36a-3545c45f2060",
+		"name": "Kesri",
+		"leadActor": "Akchay Kumar",
+		"leadActress": "Pariniti Chopra",
+		"releaseDate": "2018-09-10"
+	}
+]
