@@ -1,11 +1,12 @@
 package com.demo.microservices.movie.dtos;
 
+import java.io.IOException;
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Test;
 
+import com.demo.microservices.movie.rest.MovieController;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
@@ -20,6 +21,14 @@ public class MovieTest {
 				new Movie("Sholay", "Amitabh Bacchhan", "Hema Malini", LocalDate.of(1975, 10, 4)),
 				new Movie("Baby", "Akchay Kumar", "Tapsi Pannu", LocalDate.of(2015, 05, 25)),
 				new Movie("Kesri", "Akchay Kumar", "Pariniti Chopra", LocalDate.of(2018, 9, 10)));
+		String json = new ObjectMapper().writeValueAsString(moviesList);
+		System.out.println(json);
+	}
+	
+	@Test
+	public void testMovieController() throws IOException {
+		MovieController controller = new MovieController();
+		List<Movie> moviesList = controller.getAllMovies();
 		String json = new ObjectMapper().writeValueAsString(moviesList);
 		System.out.println(json);
 	}

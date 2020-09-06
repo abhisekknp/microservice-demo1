@@ -1,16 +1,19 @@
 package com.demo.microservices.movie.rest;
 
-import java.time.LocalDate;
-import java.util.Arrays;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
-import java.util.logging.Logger;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.demo.microservices.movie.dtos.Movie;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * REST endpoint for the movie functionality<br>
@@ -27,28 +30,17 @@ import com.demo.microservices.movie.dtos.Movie;
 @RequestMapping("/movies")
 public class MovieController {
 
-	private static final Logger LOGGER = Logger.getLogger(MovieController.class.getName());
-
-	private final List<Movie> moviesList;
-
-	public MovieController() {
-		this.moviesList = Arrays.asList(new Movie("3 Idiots", "Amir Khan", "Kareena Kapoor", LocalDate.of(2007, 12, 5)),
-				new Movie("A wednesday", "Naseeruddin Shah", "N/A", LocalDate.of(2005, 11, 21)),
-				new Movie("Sholay", "Amitabh Bacchhan", "Hema Malini", LocalDate.of(1975, 10, 4)),
-				new Movie("Baby", "Akchay Kumar", "Tapsi Pannu", LocalDate.of(2015, 05, 25)),
-				new Movie("Kesri", "Akchay Kumar", "Pariniti Chopra", LocalDate.of(2018, 9, 10)));
-	}
-
 	/**
 	 * Get movie for specific name that is passed in the path.
 	 * 
 	 * @param name
 	 * @return
+	 * @throws IOException 
 	 */
 	@RequestMapping(value = "/{name}", method = RequestMethod.GET, headers = "Accept=application/json")
-	public Movie getMovieByName(@PathVariable("name") String name) {
+	public Movie getMovieByName(@PathVariable("name") String name) throws IOException {
 		
-		for (Movie movie : moviesList) {
+		for (Movie movie : getMovieList()) {
 			if (movie.getName().equalsIgnoreCase(name)) {
 				return movie;
 			}
@@ -60,9 +52,19 @@ public class MovieController {
 	 * Get all movies.
 	 * 
 	 * @return 
+	 * @throws IOException 
 	 */
 	@RequestMapping(value = "", method = RequestMethod.GET, headers = "Accept=application/json")
-	public List<Movie> getAllMovies() {
-		return moviesList;
+	public List<Movie> getAllMovies() throws IOException {
+		return getMovieList();
+	}
+	
+	private List<Movie> getMovieList() throws IOException {
+		InputStream is = this.getClass().getClassLoader().getResourceAsStream("/app/movies.json");
+		if (null == is) {
+			is = this.getClass().getClassLoader().getResourceAsStream("movies.json");
+		}
+		String json = IOUtils.toString(is, StandardCharsets.UTF_8.name());
+		return new ObjectMapper().readValue(json, new TypeReference<List<Movie>>(){});
 	}
 }
