@@ -5,11 +5,16 @@ package com.demo.microservices.movie.dtos;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /**
@@ -24,6 +29,8 @@ public class Movie extends MovieKey {
 	private String leadActress;
 
 	private LocalDate releaseDate;
+	
+	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	
 	public Movie() {
 		super();
@@ -59,6 +66,7 @@ public class Movie extends MovieKey {
 		this.leadActress = leadActress;
 	}
 
+	@JsonDeserialize (using = CustomDateToStringDeSerializer.class)
 	public void setReleaseDate(LocalDate releaseDate) {
 		this.releaseDate = releaseDate;
 	}
@@ -117,8 +125,25 @@ public class Movie extends MovieKey {
 		   @Override 
 		   public void serialize(LocalDate value, 
 		      JsonGenerator generator, SerializerProvider arg2) throws IOException { 
-		      generator.writeString(value.toString()); 
+		      generator.writeString(formatter.format(value));
 		   } 
+	}
+	
+	/**
+	 * Custom date deserializer that converts the string to date before sending it out
+	 * 
+	 * @author Abhishek.Omar
+	 *
+	 */
+	static class CustomDateToStringDeSerializer extends JsonDeserializer<LocalDate> {
+		
+		@Override
+		public LocalDate deserialize(JsonParser p, DeserializationContext ctxt)
+				throws IOException {
+			String date = p.getText(); 
+		    return LocalDate.parse(date, formatter);
+		}
+		   
 	}
 	
 }

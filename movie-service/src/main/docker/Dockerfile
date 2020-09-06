@@ -17,6 +17,7 @@ RUN mkdir /app
 
 ADD ${APP_JAR_NAME}-${APP_JAR_VERSION}.jar /app/ 
 ADD run.sh /app/
+ADD movies.json /app/
 RUN chmod +x /app/run.sh 
 
 WORKDIR /app
