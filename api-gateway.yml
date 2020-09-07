@@ -69,11 +69,11 @@ server:
 zuul:
   ignoredServices: '*'
   routes:
-    #user-service:
-     # path: /user-service/**
-     # stripPrefix: false
-     #serviceId: user-webservice
-      #sensitiveHeaders:
+    user-service:
+      path: /review-service/**
+      stripPrefix: false
+      serviceId: review-service
+      sensitiveHeaders:
     user:
       path: /userauth/**
       stripPrefix: false

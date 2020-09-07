@@ -85,3 +85,13 @@ services:
     depends_on:
       eurekaregistry:
         condition: service_healthy
+        
+  reviewservice:
+    image: microservices_demo/review-service:0.0.1
+    mem_limit: 1073741824
+    restart: unless-stopped
+    ports:
+      - "8080/tcp"
+    depends_on:
+      eurekaregistry:
+        condition: service_healthy
