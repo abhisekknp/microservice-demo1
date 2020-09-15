@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -40,7 +41,9 @@ public class ReviewController {
 	 * @return
 	 */
 	@PostMapping(value = "/postReview", headers = "Accept=application/json")
-	public void postReview(Review review, Principal principal) {
+	public void postReview(@RequestBody Review review, Principal principal) {
+		System.out.println(principal);
+		System.out.println(review.getName());
 		validateReviewRequest(review);
 		String movieName = review.getName();
 		Movie movie = validateAndGetMovieObject(review.getName());
@@ -49,8 +52,10 @@ public class ReviewController {
 		reviewKey.setUserName(userName);
 		reviewKey.setName(movieName);
 		reviewKey.setId(movie.getId());
-		reviewKey = userReviewMap.putIfAbsent(reviewKey, review);
-		if(null != reviewKey) {
+		review.setId(reviewKey.getId());
+		review.setUserName(userName);
+		ReviewKey reviewKeyOld = userReviewMap.putIfAbsent(reviewKey, review);
+		if(null != reviewKeyOld) {
 			System.out.println("user has already reviewed this movie, use update service to update the reviews!!");
 		} else {
 			System.out.println("review submitted successfully!!");
@@ -62,7 +67,7 @@ public class ReviewController {
 		Movie movie = validateAndGetMovieObject(movieName);
 		List<Review> reviewsList = new ArrayList<>();
 		userReviewMap.keySet().forEach(reviewKey -> {
-			if(reviewKey.getId() == movie.getId() && reviewKey.getName().equalsIgnoreCase(movie.getName())) {
+			if(reviewKey.getId().equals(movie.getId()) && reviewKey.getName().equalsIgnoreCase(movie.getName())) {
 				reviewsList.add(userReviewMap.get(reviewKey));
 			}
 		});

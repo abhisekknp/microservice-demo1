@@ -27,7 +27,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  *
  */
 @RestController
-@RequestMapping("/movies")
+@RequestMapping("")
 public class MovieController {
 
 	/**
@@ -37,7 +37,7 @@ public class MovieController {
 	 * @return
 	 * @throws IOException 
 	 */
-	@RequestMapping(value = "/{name}", method = RequestMethod.GET, headers = "Accept=application/json")
+	@RequestMapping(value = "/movies/{name}", method = RequestMethod.GET, headers = "Accept=application/json")
 	public Movie getMovieByName(@PathVariable("name") String name) throws IOException {
 		
 		for (Movie movie : getMovieList()) {
@@ -54,7 +54,7 @@ public class MovieController {
 	 * @return 
 	 * @throws IOException 
 	 */
-	@RequestMapping(value = "", method = RequestMethod.GET, headers = "Accept=application/json")
+	@RequestMapping(value = "/movies", method = RequestMethod.GET, headers = "Accept=application/json")
 	public List<Movie> getAllMovies() throws IOException {
 		return getMovieList();
 	}

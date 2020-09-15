@@ -89,7 +89,7 @@ public class MovieService {
 		if (LOGGER.isLoggable(Level.INFO)) {
 			LOGGER.info(String.format("Checking movie for movie name [%s]", movieName));
 		}
-		Movie movie =  restTemplate.getForObject(String.format("http://movie-service/%s", movieName),
+		Movie movie =  restTemplate.getForObject(String.format("http://movie-service/movies/%s", movieName),
 				Movie.class);
 		System.out.println(movie);
 		return movie;
