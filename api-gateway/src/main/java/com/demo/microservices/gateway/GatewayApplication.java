@@ -42,7 +42,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication
 @EnableEurekaClient
 @EnableZuulProxy
-@EnableSwagger2
+//@EnableSwagger2
 public class GatewayApplication {
 
 	public static void main(String[] args) {

@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_microservice_demo1_1690130571504-pr-trigger-input-set
+  identifier: Build_microservice_demo1_1690130571504prtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: default_project
+  pipeline:
+    identifier: Build_microservice_demo1_1690130571504
+    properties:
+      ci:
+        codebase:
+          build:
+            type: PR
+            spec:
+              number: <+trigger.prNumber>
